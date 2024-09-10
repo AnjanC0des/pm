@@ -20,7 +20,7 @@ function App() {
             <div className="w-auto">
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger>Projects</TooltipTrigger>
+                  <TooltipTrigger>+</TooltipTrigger>
                 </Tooltip>
               </TooltipProvider>
             </div>
