@@ -3,7 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { Card } from "@/components/ui/card";
-
+import InputForm from "./InputForm";
 import {
   Tooltip,
   TooltipProvider,
@@ -25,7 +25,9 @@ function App() {
               </TooltipProvider>
             </div>
           </Card>
-          <Card className="col-span-5 w-full"></Card>
+          <Card className="col-span-5 w-full">
+            <InputForm />
+          </Card>
         </div>
       </div>
     </>
