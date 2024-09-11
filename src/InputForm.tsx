@@ -1,11 +1,5 @@
-import { useState, useId } from "react";
 import { v4 } from "uuid";
-export default ({ set }) => {
-  const [state, setState] = useState({
-    t: "",
-    d: "",
-    due: "",
-  });
+export default ({ state, setState, set }) => {
   const id = v4();
   const change = (key, value) => {
     setState((prev) => {
