@@ -33,6 +33,9 @@ function App() {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>+</TooltipTrigger>
+                  {Object.keys(state).map((key) => {
+                    return <TooltipTrigger>{state[key].title}</TooltipTrigger>;
+                  })}
                 </Tooltip>
               </TooltipProvider>
             </div>
