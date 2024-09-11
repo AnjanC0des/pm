@@ -15,15 +15,32 @@ const reducer = (state, action) => {
       ...state,
       [action.id]: action.load,
     };
+  } else if (action.func == "add subtasks") {
+    console.log("subtask called");
+    let subs = state[action.id].subtasks;
+    let key = state[action.id];
+    let sub = {
+      ...{ subs },
+      [action.subtaskid]: action.subtaskdesc,
+    };
+    return {
+      ...state,
+      [action.id]: {
+        ...key,
+        subtasks: sub,
+      },
+    };
   } else {
     return {};
   }
 };
 function App() {
+  const [subtext, setSubtext] = useState("");
   const [state1, setState1] = useState({
     t: "",
     d: "",
     due: "",
+    subtasks: {},
   });
   const [state, setState] = useReducer(reducer, {});
   const [aid, setAid] = useState("");
@@ -39,22 +56,29 @@ function App() {
     aid === "" ? (
       <InputForm set={setState} state={state1} setState={setState1} />
     ) : (
-      <Project project={state[aid]} />
+      <Project
+        project={state}
+        aid={aid}
+        subtext={subtext}
+        setSubtext={setSubtext}
+        addSubtasks={setState}
+      />
     );
   return (
     <>
-      <div
-        className="dark h-screen"
-        onClick={() => {
-          showProject("");
-        }}
-      >
+      <div className="dark h-screen">
         <div className="grid grid-cols-7 gap-4">
           <Card className="col-span-2 w-full h-screen p-2">
             <div className="w-auto">
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger>+</TooltipTrigger>
+                  <TooltipTrigger
+                    onClick={() => {
+                      showProject("");
+                    }}
+                  >
+                    +
+                  </TooltipTrigger>
                   {Object.keys(state).map((key) => {
                     return (
                       <TooltipTrigger
