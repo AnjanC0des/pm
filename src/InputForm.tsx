@@ -1,13 +1,13 @@
 import { useState, useId } from "react";
-export default () => {
+import { v4 } from "uuid";
+export default ({ set }) => {
   const [state, setState] = useState({
     t: "",
     d: "",
-    due: new Date().toLocaleDateString(),
+    due: "",
   });
-  const id = useId();
+  const id = v4();
   const change = (key, value) => {
-    console.log(state);
     setState((prev) => {
       return {
         ...prev,
@@ -21,7 +21,7 @@ export default () => {
       dsecription: state.d,
       due: state.due,
     };
-    console.log(id + " " + state.t + state.d + state.due);
+    set({ func: "add", id: id, load: x });
     setState({
       t: "",
       d: "",

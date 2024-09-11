@@ -1,6 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useReducer } from "react";
 import "./App.css";
 import { Card } from "@/components/ui/card";
 import InputForm from "./InputForm";
@@ -10,8 +8,22 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+const reducer = (state, action) => {
+  if (action.func == "add") {
+    return {
+      ...state,
+      [action.id]: action.load,
+    };
+  } else {
+    return {};
+  }
+};
 function App() {
-  const [obj, setObj] = useState();
+  const [state, setState] = useReducer(reducer, {});
+  for (let key in state) {
+    console.log(key);
+    console.log(state[key].title);
+  }
   return (
     <>
       <div className="dark h-screen">
@@ -26,7 +38,7 @@ function App() {
             </div>
           </Card>
           <Card className="col-span-5 w-full">
-            <InputForm />
+            <InputForm set={setState} />
           </Card>
         </div>
       </div>
