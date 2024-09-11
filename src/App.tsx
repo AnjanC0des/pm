@@ -20,7 +20,7 @@ const reducer = (state, action) => {
     let subs = state[action.id].subtasks;
     let key = state[action.id];
     let sub = {
-      ...{ subs },
+      ...subs,
       [action.subtaskid]: action.subtaskdesc,
     };
     return {
