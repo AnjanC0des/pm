@@ -3,7 +3,7 @@ export default (props) => {
   const { aid, add, subtext } = props;
   const id = v4();
   const subchange = (e) => {
-    add({ func: "edit subtext", load: e.target.value });
+    add({ func: "edit subtext", load: e.target.value, id: aid });
   };
   const submitSubtask = () => {
     add({
