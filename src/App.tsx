@@ -15,6 +15,9 @@ const reducer = (state, action) => {
       ...state,
       [action.id]: action.load,
     };
+  } else if (action.func == "delete") {
+    const { [action.id]: _, ...newstate } = state;
+    return newstate;
   } else if (action.func == "edit subtext") {
     let project = state[action.id];
     return {
@@ -39,12 +42,22 @@ const reducer = (state, action) => {
         subtasks: sub,
       },
     };
+  } else if (action.func == "delete subtask") {
+    let subs = state[action.id].subtasks;
+    let key = state[action.id];
+    let { [action.sid]: _, ...newsubs } = subs;
+    return {
+      ...state,
+      [action.id]: {
+        ...key,
+        subtasks: newsubs,
+      },
+    };
   } else {
     return {};
   }
 };
 function App() {
-  const [subtext, setSubtext] = useState("");
   const [state1, setState1] = useState({
     t: "",
     d: "",
@@ -56,6 +69,11 @@ function App() {
   const showProject = (id) => {
     setAid(id);
   };
+
+  const delfunc = (id) => {
+    setState({ func: "delete", id: id });
+    setAid("");
+  };
   for (let key in state) {
     console.log(key);
     console.log(state[key].title);
@@ -65,7 +83,7 @@ function App() {
     aid === "" ? (
       <InputForm set={setState} state={state1} setState={setState1} />
     ) : (
-      <Project project={state} aid={aid} add={setState} />
+      <Project project={state} aid={aid} add={setState} delfunc={delfunc} />
     );
   return (
     <>
