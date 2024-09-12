@@ -14,6 +14,7 @@ export default ({ state, setState, set }) => {
       title: state.t,
       dsecription: state.d,
       due: state.due,
+      tempsubtask: "",
       subtasks: {},
     };
     set({ func: "add", id: id, load: x });

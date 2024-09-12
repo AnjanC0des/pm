@@ -1,18 +1,18 @@
 import { v4 } from "uuid";
 export default (props) => {
-  const { aid, addSubtasks, subtext, setSubtext } = props;
+  const { aid, add, subtext } = props;
   const id = v4();
   const subchange = (e) => {
-    setSubtext(e.target.value);
+    add({ func: "edit subtext", load: e.target.value });
   };
   const submitSubtask = () => {
-    addSubtasks({
+    add({
       func: "add subtasks",
       id: aid,
       subtaskid: id,
       subtaskdesc: subtext,
     });
-    setSubtext("");
+    add({ func: "edit subtext", load: "", id: aid });
   };
   return (
     <>

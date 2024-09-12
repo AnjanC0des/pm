@@ -15,6 +15,15 @@ const reducer = (state, action) => {
       ...state,
       [action.id]: action.load,
     };
+  } else if (action.func == "edit subtext") {
+    let project = state[action.id];
+    return {
+      ...state,
+      [action.id]: {
+        ...project,
+        tempsubtask: action.load,
+      },
+    };
   } else if (action.func == "add subtasks") {
     console.log("subtask called");
     let subs = state[action.id].subtasks;
@@ -56,13 +65,7 @@ function App() {
     aid === "" ? (
       <InputForm set={setState} state={state1} setState={setState1} />
     ) : (
-      <Project
-        project={state}
-        aid={aid}
-        subtext={subtext}
-        setSubtext={setSubtext}
-        addSubtasks={setState}
-      />
+      <Project project={state} aid={aid} add={setState} />
     );
   return (
     <>
